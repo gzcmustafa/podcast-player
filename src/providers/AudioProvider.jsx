@@ -65,6 +65,9 @@ export default function AudioProvider({children}) {
         pause() {
           playerRef.current.pause()
         },
+        toggle(episode){
+          this.isPlaying(episode) ? actions.pause() : actions.play(episode)
+        },
         toggleMute() {
           dispatch({type: ACTIONS.TOGGLE_MUTE})
         },
