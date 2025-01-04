@@ -7,6 +7,7 @@ import {
 } from "react-query";
 import EpisodeList from "./components/EpisodeList";
 import PageContainer from "./container/PageContainer";
+import AudioProvider from "./providers/AudioProvider";
 
 const queryClient = new QueryClient();
 
@@ -16,7 +17,9 @@ function App() {
     
     <PageContainer>
         <QueryClientProvider client={queryClient}>
-            <EpisodeList/>
+           <AudioProvider>
+               <EpisodeList/>
+           </AudioProvider>
           </QueryClientProvider>
     </PageContainer>
 
