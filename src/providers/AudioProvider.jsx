@@ -10,7 +10,6 @@ const ACTIONS = {
   SET_DURATION:"SET_DURATION",
 }
 
-export const AudioPlayerContext = createContext();
 
 const intialState = {
   episode:null,
@@ -18,6 +17,7 @@ const intialState = {
   muted:false,
   currentTime:0,
   duration:0,
+
 }
 
 const audioReducer = (state,action) => {
@@ -27,7 +27,7 @@ const audioReducer = (state,action) => {
     case ACTIONS.PLAY:
       return {...state, playing:true};
     case ACTIONS.PAUSE:
-      return {...state, playin:false};
+      return {...state, playing:false};
     case ACTIONS.TOGGLE_MUTE:
       return {...state, muted: !state.muted};
     case ACTIONS.SET_CURRENT_TIME:
@@ -40,6 +40,9 @@ const audioReducer = (state,action) => {
   }
 }
 
+export const AudioPlayerContext = createContext();
+
+
 export default function AudioProvider({children}) {
     const [state,dispatch] = useReducer(audioReducer,intialState);
 
@@ -49,6 +52,7 @@ export default function AudioProvider({children}) {
       () => ({
         play(episode) {
             if(episode) {
+              console.log("Playing episode:", episode);
               dispatch({type: ACTIONS.SET_META, payload: episode});
               if(playerRef.current && playerRef.currentSrc !== episode.audioUrl) {
                 let playbackRate = playerRef.current.playbackRate;
@@ -99,7 +103,7 @@ export default function AudioProvider({children}) {
 
   return (
   <>
-    <AudioPlayerContext.Provider value={{api}}>
+    <AudioPlayerContext.Provider value={{...api}}>
         {children} 
     </AudioPlayerContext.Provider>
     <audio 
