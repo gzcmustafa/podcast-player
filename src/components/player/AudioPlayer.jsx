@@ -34,37 +34,33 @@ export default function AudioPlayer() {
     }
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 bg-blue-950 text-white p-4 flex flex-col shadow-lg rounded-t-lg">
-            <div className="flex items-center justify-between">
-                <div className='flex items-center w-1/4'>
-                    <img 
-                        src={player.episode.imageUrl} 
-                        alt="Episode Cover" 
-                        className='w-16 h-16 rounded-lg mr-4' 
+        <div className="fixed bottom-0 left-0 right-0 bg-blue-950 text-white p-4 flex flex-col md:flex-row items-center justify-between shadow-lg rounded-t-lg">
+            <div className="flex items-center w-full md:w-1/4">
+                <img 
+                    src={player.episode.imageUrl} 
+                    alt="Episode Cover" 
+                    className='w-16 h-16 md:w-24 md:h-24 rounded-lg mr-4' 
+                />
+                <div className='flex flex-col'>
+                    <h2 className='text-white font-bold text-lg md:text-xl'>
+                        {player.episode.name}
+                    </h2>
+                </div>
+            </div>
+
+            <div className='flex flex-col items-center justify-center flex-1 mt-4 md:mt-0 p-10'>
+                <div className='flex items-center gap-2'>
+                    <RewindButton onRewind={onRewind}/>
+                    <PlayPauseButton
+                        isPlaying={player.playing}
+                        onPlayPauseToggle={playPauseToggle}
                     />
-                    <div className='flex flex-col'>
-                        <h2 className='text-white font-bold text-lg'>
-                            {player.episode.name}
-                        </h2>
-                    </div>
+                    <ForwardButton onForward={onForward} />
                 </div>
-
-                <div className='flex flex-col items-center justify-center flex-1'>
-                    <div className='flex items-center gap-2'>
-                        <RewindButton onRewind={onRewind}/>
-                        <PlayPauseButton
-                            isPlaying={player.playing}
-                            onPlayPauseToggle={playPauseToggle}
-                        />
-                        <ForwardButton onForward={onForward} />
-                    </div>
-                    <div className='flex items-center gap-2 mt-2'>
-                        <MuteButton isMute={player.muted} onMute={onMute} />
-                        <PlaybackRateButton onPlaybackRateChange={player.playbackRate} />
-                    </div>
+                <div className='flex items-center gap-2 mt-2'>
+                    <MuteButton isMute={player.muted} onMute={onMute} />
+                    <PlaybackRateButton onPlaybackRateChange={player.playbackRate} />
                 </div>
-
-                <div className='w-1/4'></div>
             </div>
 
             <div className="w-full flex items-center gap-2 mb-2">

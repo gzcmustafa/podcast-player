@@ -19,12 +19,12 @@ export default function Episode({episode}) {
   const player = useAudioPlayer(episode);
   console.log(player)
   return (
-    <div>
+    <div className="w-full">
        <Card className="w-full">
        
       <CardHeader className="p-6">
-      <div className="flex gap-6">
-          <div className="w-[150px] h-[150px] flex-shrink-0">
+      <div className="flex flex-col md:flex-row gap-6">
+          <div className="w-full md:w-[150px] h-[150px] flex-shrink-0">
             <img className='w-full h-full object-cover rounded-lg shadow-xl' src={episode.imageUrl} alt="" />
           </div>
             
