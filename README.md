@@ -33,7 +33,7 @@ The following environment variables are required:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/podcast-search-app.git
+git clone https://github.com/gzcmustafa/podcast-player.git
 ```
 
 2. Install dependencies:
