@@ -2,11 +2,10 @@
 
 A modern web application that allows users to search and discover podcasts using the Taddy Podcast API. Built with React and modern web technologies.
 
-![Podcast Search App](https://images.unsplash.com/photo-1589903308904-1010c2294adc?auto=format&fit=crop&q=80&w=1200&h=600)
 
 ## 🚀 Live Demo
 
-[View Live Demo]()
+[View Live Demo](https://podcast-player-vite-react.netlify.app/)
 
 
 
