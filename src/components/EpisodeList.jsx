@@ -3,6 +3,7 @@ import {gql, GraphQLClient} from "graphql-request"
 import { useQuery } from 'react-query'
 import Episode from './Episode'
 import SearchBar from './SearchBar'
+import { RingLoader } from 'react-spinners'
 
 const TADDY_API_KEY = import.meta.env.VITE_TADDY_API_KEY
 const TADDY_USER_ID = import.meta.env.VITE_TADDY_USER_ID
@@ -70,7 +71,12 @@ export default function EpisodeList() {
         }
     };
 
-    if(isLoading) return <div>Loading...</div>;
+    if(isLoading) return <div className='flex items-center justify-center h-screen'>
+            <RingLoader
+            color="#db00ff"
+            size={100}
+            />
+  </div>;
     if(isError) return <div>Error: {error.message}</div>;
 
     return (

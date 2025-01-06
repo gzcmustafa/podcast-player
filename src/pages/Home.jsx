@@ -10,14 +10,14 @@ export default function Home() {
     navigate('/episode'); 
   };
 
-  const sampleSearchTerms = ['The Daily', 'Serial', 'TED Talks Daily', 'How I Built This', 'Stuff You Should Know', 'English'];
+  const sampleSearchTerms = ['The Daily', 'Serial', 'TED Talks Daily', 'How I Built This', 'Stuff You Should Know'];
 
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-900 via-purple-800 to-purple-900 text-white">
     {/* Hero Section */}
-    <div className="container mx-auto px-4 pt-40 pb-32">
-      <div className="max-w-4xl mx-auto text-center">
+    <div className="container mx-auto px-4 pt-1 pb-32 ">
+      <div className="max-w-4xl mx-auto text-center 2xl:mt-40">
         <div className="flex justify-center mb-8">
           <Headphones className="w-20 h-20 text-purple-300" />
         </div>
@@ -40,7 +40,7 @@ export default function Home() {
   
 
     {/* Sample Search Terms */}
-    <div className="container mx-auto px-4 py-20">
+    <div className="container mx-auto px-4  2xl:mt-42">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-8">Popular Search Terms</h2>
         <div className="flex flex-wrap justify-center gap-4">
