@@ -17,13 +17,13 @@ const intialState = {
   muted:false,
   currentTime:0,
   duration:0,
-
+  lastPlayedTime: {},
 }
 
 const audioReducer = (state,action) => {
   switch (action.type) {
     case ACTIONS.SET_META:
-      return {...state, episode:action.payload};
+      return {...state, episode:action.payload, currentTime: state.lastPlayedTime[action.payload.uuid] || 0};
     case ACTIONS.PLAY:
       return {...state, playing:true};
     case ACTIONS.PAUSE:
@@ -31,7 +31,7 @@ const audioReducer = (state,action) => {
     case ACTIONS.TOGGLE_MUTE:
       return {...state, muted: !state.muted};
     case ACTIONS.SET_CURRENT_TIME:
-      return {...state, currentTime:action.payload};
+      return {...state, currentTime:action.payload, lastPlayedTime: {...state.lastPlayedTime, [state.episode?.uuid]: action.payload}};
     case ACTIONS.SET_DURATION:
       return {...state, duration:action.payload};
     default:
@@ -52,7 +52,6 @@ export default function AudioProvider({children}) {
       () => ({
         play(episode) {
             if(episode) {
-              console.log("Playing episode:", episode);
               dispatch({type: ACTIONS.SET_META, payload: episode});
               if(playerRef.current && playerRef.currentSrc !== episode.audioUrl) {
                 let playbackRate = playerRef.current.playbackRate;
@@ -61,16 +60,23 @@ export default function AudioProvider({children}) {
                 playerRef.current.pause();
 
                 playerRef.current.playbackRate = playbackRate;
-                playerRef.current.currentTime = 0;
+                playerRef.current.currentTime = state.lastPlayedTime[episode.uuid] || 0;
               }
               playerRef.current.play()
+            } else if (state.episode) {
+              playerRef.current.currentTime = state.lastPlayedTime[state.episode.uuid] || 0;
+              playerRef.current.play();
             }
         },
         pause() {
           playerRef.current.pause()
         },
-        toggle(episode){
-          this.isPlaying(episode) ? actions.pause() : actions.play(episode)
+        toggle(episode) {
+          if (episode) {
+            this.isPlaying(episode) ? this.pause() : this.play(episode);
+          } else if (state.episode) {
+            state.playing ? this.pause() : this.play(state.episode);
+          }
         },
         toggleMute() {
           dispatch({type: ACTIONS.TOGGLE_MUTE})
@@ -90,13 +96,13 @@ export default function AudioProvider({children}) {
               playerRef.current.playbackRate = rate;
           }
         },
-        isPlaying(epsiode) {
-          return epsiode
-          ? state.playing && playerRef.current?.currentSrc === epsiode.audioUrl
-          : state.playing;
+        isPlaying(episode) {
+          return episode
+            ? state.playing && playerRef.current?.currentSrc === episode.audioUrl
+            : state.playing;
         }
       }),
-      [state.playing]
+      [state.playing, state.episode, state.lastPlayedTime]
     )
 
     let api = useMemo(() => ({...state, ...actions}), [state,actions])

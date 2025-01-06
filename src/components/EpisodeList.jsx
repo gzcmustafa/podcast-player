@@ -66,7 +66,7 @@ export default function EpisodeList() {
 
     const handleSearch = () => {
         if (inputValue.trim()) {
-            setSearchTerm(inputValue.trim());
+            setSearchTerm(inputValue.trim().toLowerCase());
         }
     };
 

@@ -10,18 +10,17 @@ export default function useAudioPlayer(episode) {
 
     return useMemo(
         () => ({
-
             ...player,
             play() {
                 player.play(episode);
             },
-            toggle(){
+            toggle() {
                 player.toggle(episode);
             },
-            get playing(){
+            get playing() {
                 return player.isPlaying(episode);
             },
         }),
-        [player,episode]
+        [player, episode]
     )
 }
