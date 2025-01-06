@@ -19,6 +19,7 @@ A modern web application that allows users to search and discover podcasts using
 - **Lucide React** - Beautiful and customizable icons
 - **React Query** - Powerful data management
 - **GraphQL Request** - Lightweight GraphQL client
+- **shadcn/ui** - High-quality React components built with Radix UI and Tailwind
 
 ## 🔑 Environment Variables
 
