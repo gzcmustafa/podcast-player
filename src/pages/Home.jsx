@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-900 via-purple-800 to-purple-900 text-white">
     {/* Hero Section */}
-    <div className="container mx-auto px-4 pt-1 pb-32 ">
+    <div className="container mx-auto px-4 pt-4 pb-14 ">
       <div className="max-w-4xl mx-auto text-center 2xl:mt-40">
         <div className="flex justify-center mb-8">
           <Headphones className="w-20 h-20 text-purple-300" />
